@@ -1,8 +1,8 @@
 {
   "name": "dias",
-  "version": "0.1.2", 
+  "version": "0.1.2",
   "description": "Detect PaaS details of your application instance",
-   "main": "index.js",
+  "main": "index.js",
   "scripts": {
     "test": "mocha -R list test/*.js",
     "TESTS.md": "mocha -R markdown test/*.js > TESTS.md"
@@ -11,23 +11,23 @@
     "type": "git",
     "url": "https://github.com/angleman/dias.git"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "author": "angleman",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/angleman/dias/issues"
   },
-  "engines" : { 
-    "node" : ">=0.8.0" 
+  "engines": {
+    "node": ">=0.8.0"
   },
   "dependencies": {
+    "everypaas": "~0.0.7"
   },
   "devDependencies": {
-     "license-md": "~0.1.8",
-     "grunt": "0.4.x",
-     "grunt-bump": "0.0.x",
-     "mocha": "~1.12.0",
-     "should": "~1.2.2"
-   }
+    "license-md": "~0.1.8",
+    "grunt": "0.4.x",
+    "grunt-bump": "0.0.x",
+    "mocha": "~1.12.0",
+    "should": "~1.2.2"
+  }
 }
