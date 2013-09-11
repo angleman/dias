@@ -1,7 +1,7 @@
 {
   "name": "dias",
   "version": "0.1.1", 
-  "description": "description",
+  "description": "Detect PaaS details of your application instance",
    "main": "index.js",
   "scripts": {
     "test": "mocha -R list test/*.js",
