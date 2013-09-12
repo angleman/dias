@@ -7,7 +7,7 @@ describe('package', function() {
         app = require('../index.js');
     });
 
-    describe('initializes', function() {
+    it('initializes', function() {
         var works = app();
         should.exist(works);
         console.log(works);
