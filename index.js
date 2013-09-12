@@ -9,6 +9,24 @@ var os        = require('os')        // http://nodejs.org/api/os.html
   , paasList  = ['appfog', 'nodejitsu', 'heroku', 'travis', 'strider', 'dotcloud']
 ;
 
+appfog    = JSON.parse(appfog);
+
+if (appfog && appfog.uris && appfog.uris.length) {
+	var uris = appfog.uris;
+	for (var i=0; i<uris.length; i++)
+	{
+		var uri = uris[i];
+		if (uri.indexOf('.af.cm') > -1) {
+			parts = uri.split('.');
+			var len = parts.length;
+			delete parts[len-1];
+			delete parts[len-2];			
+			delete parts[0];
+			appfog.datacenter = parts.join('.');
+		}
+	}
+}
+
 
 function init() {
 	isInit = true;
@@ -18,11 +36,14 @@ function init() {
 	if (mhz) {
 		model = model.substr(0,mhz);
 	}
-	model  = model.replace('(R)', '').replace('(TM)', '')
+	model  = model.replace('(R)', '').replace('(R)', '').replace('(R)', '').replace('(TM)', '').replace('(TM)', '').replace('(TM)', '')
 		.replace('    ', ' ').replace('   ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ')
 	;
 	if (model.length>1 && model.substr(model.length-1, 1) == ' ') {
 		model = model.substr(0, model.length-1);
+	}
+	if (model.length>2 && model.substr(model.length-2, 2) == ' 0') {
+		model = model.substr(0, model.length-2);
 	}
 	if (model.length == 0) {
 		model = undefined;
@@ -40,7 +61,7 @@ function init() {
 	  , cpus: {
 	  		model: model
 	  	  , cores: cpus.length
-	  	  , speed: cpus[0].speed
+	  	  , speed: (pus[0].speed) ? cpus[0].speed : undefined
 	  }
 	}
 
@@ -64,7 +85,11 @@ function init() {
 	if (paas) {
 		result.paas  = paas;
 		result[paas] = (paas == 'nodejitsu') ? nodejitsu 
-			: (paas == 'appfog') ? appfog 
+			: (paas == 'appfog') ? {
+				id: appfog.instance_id
+			  , index: appfog.instance_index
+			  , center: appfog.datacenter 
+			}
 			: undefined
 		;
 	}
