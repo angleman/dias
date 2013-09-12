@@ -32,8 +32,7 @@ function init() {
 	  , type:     os.type()
 	  , platform: os.platform()
 	  , arch:     os.arch()
-	  , release:  os.release()
-	  , platform: os.platform()
+	  , version:  os.release()
 	  , cpus: {
 	  		model: model
 	  	  , cores: cpus.length
@@ -65,6 +64,9 @@ function init() {
 			: undefined
 		;
 	}
+	
+	var json = JSON.stringify(result); // drop undefined variables
+	result = JSON.parse(json);
 }
 
 
