@@ -1,6 +1,6 @@
 {
   "name": "dias",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "description": "Detect PaaS details of your application instance",
   "main": "index.js",
   "scripts": {
@@ -30,7 +30,7 @@
     "everypaas": "~0.0.7"
   },
   "devDependencies": {
-    "license-md": "~0.1.8",
+    "license-md": "~0.2.5",
     "grunt": "0.4.x",
     "grunt-bump": "0.0.x",
     "mocha": "~1.12.0",
