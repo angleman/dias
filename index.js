@@ -21,11 +21,14 @@ function init() {
 	model  = model.replace('(R)', '').replace('(TM)', '')
 		.replace('    ', ' ').replace('   ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ')
 	;
-	if (model.substr(model.length-1, 1) == ' ') {
+	if (model.length>1 && model.substr(model.length-1, 1) == ' ') {
 		model = model.substr(0, model.length-1);
 	}
+	if (model.length == 0) {
+		model = undefined;
+	}
 	result = {
-		os:       os.hostname()
+		host:     os.hostname()
 	  , type:     os.type()
 	  , platform: os.platform()
 	  , arch:     os.arch()
