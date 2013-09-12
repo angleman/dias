@@ -11,7 +11,13 @@
     "type": "git",
     "url": "https://github.com/angleman/dias.git"
   },
-  "keywords": [],
+  "keywords": [
+    "paas",
+    "platform",
+    "os",
+    "everypaas",
+    "PaaS"
+  ],
   "author": "angleman",
   "license": "MIT",
   "bugs": {
