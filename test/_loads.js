@@ -8,7 +8,7 @@ describe('package', function() {
     });
 
     describe('initializes', function() {
-        var works = app({round: true});
+        var works = app();
         should.exist(works);
         console.log(works);
     });
