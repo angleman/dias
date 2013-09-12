@@ -58,15 +58,15 @@ function init() {
 	}
 	result = {
 		host:     os.hostname()
-	  , os:     os.type()
+	  , os:       os.type()
 //	  , platform: os.platform()
 	  , version:  os.release()
 	  , arch:     os.arch()
-	  , gid:  process.getgid()
-	  , uid:  process.getuid()
-	  , title: process.title
-	  , node: process.version.replace('v', '')
-	  , cpus: {
+	  , gid:      process.getgid()
+	  , uid:      process.getuid()
+	  , title:    (process.title && process.title.length) ? process.title : undefined
+	  , node:     process.version.replace('v', '')
+	  , cpus:     {
 	  		model: model
 	  	  , cores: cpus.length
 	  	  , speed: (cpus[0].speed) ? cpus[0].speed : undefined
