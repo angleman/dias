@@ -48,7 +48,7 @@ console.log(dias());
      center: 'aws'
   },
   up: 10212921.312263723,
-  load: [ 0.5444335935, 0.40966796875, 0.35546875 ], // 1, 5, and 15 minute load averages
+  load: [ 0.5444335935, 0.40966796875, 0.35546875 ], // 1, 5, & 15 minute load averages
   mem: { total: 17909567488, free: 352100352 } 
 }
 ```
