@@ -33,6 +33,10 @@ function init() {
 	  , platform: os.platform()
 	  , arch:     os.arch()
 	  , version:  os.release()
+	  , gid:  process.getgid()
+	  , uid:  process.getuid()
+	  , title: process.title
+	  , node: process.version.replace('v', '')
 	  , cpus: {
 	  		model: model
 	  	  , cores: cpus.length
@@ -64,7 +68,7 @@ function init() {
 			: undefined
 		;
 	}
-	
+
 	var json = JSON.stringify(result); // drop undefined variables
 	result = JSON.parse(json);
 }
