@@ -63,11 +63,10 @@ console.log(dias());
    arch: 'x64',
    gid: 65534,
    uid: 103,
-   title: '',
    node: '0.10.17',
    cpus: 
    { 
-     model: 'Intel Xeon CPU E5645 ',
+     model: 'Intel Xeon CPU E5645',
      cores: 24,
      speed: 2400 
    },
