@@ -64,7 +64,7 @@ function init() {
 	  , arch:     os.arch()
 	  , gid:      process.getgid()
 	  , uid:      process.getuid()
-	  , title:    (process.title && process.title.length) ? process.title : undefined
+//	  , title:    (process.title && process.title.length) ? process.title : undefined
 	  , node:     process.version.replace('v', '')
 	  , cpus:     {
 	  		model: model
