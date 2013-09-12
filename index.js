@@ -42,8 +42,10 @@ function init() {
 	if (mhz) {
 		model = model.substr(0,mhz);
 	}
-	model  = model.replace('(R)', '').replace('(R)', '').replace('(R)', '').replace('(TM)', '').replace('(TM)', '').replace('(TM)', '')
-		.replace('    ', ' ').replace('   ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ')
+	model  = model
+		.replace('(R)', '').replace('(R)', '').replace('(R)', '').replace('(TM)', '').replace('(TM)', '').replace('(TM)', '')
+		.replace('(r)', '').replace('(r)', '').replace('(r)', '').replace('(tm)', '').replace('(tm)', '').replace('(tm)', '')
+		.replace('    ', ' ').replace('   ', ' ').replace('   ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ')
 	;
 	if (model.length>1 && model.substr(model.length-1, 1) == ' ') {
 		model = model.substr(0, model.length-1);
@@ -56,10 +58,10 @@ function init() {
 	}
 	result = {
 		host:     os.hostname()
-	  , type:     os.type()
-	  , platform: os.platform()
-	  , arch:     os.arch()
+	  , os:     os.type()
+//	  , platform: os.platform()
 	  , version:  os.release()
+	  , arch:     os.arch()
 	  , gid:  process.getgid()
 	  , uid:  process.getuid()
 	  , title: process.title
@@ -105,6 +107,7 @@ function init() {
 }
 
 
+
 function update(options) {
 	options = options || {};
 	result.up   = os.uptime();
@@ -121,6 +124,7 @@ function update(options) {
 		result.mem.free = Math.round(result.mem.free / 1000000);
 	}
 }
+
 
 
 function dias(options) {

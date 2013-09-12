@@ -11,15 +11,15 @@ npm install dias
 
 ## Supported PaaS services
 
-- Heroku
 - AppFog
 - Nodejitsu
-- Strider
 - Travis CI
+- Heroku
+- Strider
 - dotCloud
 - your box
 
-While Dias leverages [everypaas](https://github.com/niallo/everypaas/), as of version 0.0.7, everypaas appears to only have functional code: *Heroku, Strider, and dotCloud*.
+While Dias leverages [everypaas](https://github.com/niallo/everypaas/), as of version 0.0.7, everypaas appears to only have functional code for: *Heroku, Strider, and dotCloud*.
 
 ## Usage
 
@@ -32,55 +32,89 @@ console.log(dias());
 
 ```
 {
-  host: 'us01-useast1a-dea-53b8cf5f40',
-  type: 'Linux',
-  platform: 'linux',
-  arch: 'x64',
+  host: 'us01-dea-f8e454e6d5',
+  os: 'Linux',
   version: '3.2.0-23-virtual',
-  gid: 117,
-  uid: 22104,
+  arch: 'x64',
+  gid: 114,
+  uid: 22212,
   title: '/opt/cloudfoundry/runtimes/nodejs-v0.8.14/bin/node',
   node: '0.8.14',
-  cpus: { model: 'Intel Xeon(R) CPU E5-2665 0', cores: 2, speed: 0 },
+  cpus: { model: 'Intel Xeon CPU E5-2665', cores: 2 },
   paas: 'appfog',
-
-  up: 21111457.15465144,
-  load: [ 1.40087890625, 1.22607421875, 1.17138671875 ],
-  mem: { total: 17909567488, free: 1730289664 } 
+  appfog: { 
+     id: '28af8427780e30d77d1715e64880445f',
+     index: 0,
+     center: 'aws'
+  },
+  up: 10212921.312263723,
+  load: [ 0.5444335935, 0.40966796875, 0.35546875 ], // 1, 5, and 15 minute load averages
+  mem: { total: 17909567488, free: 352100352 } 
 }
 ```
 
-## Example Travis CI
+## Nodejitsu example
+
+```
+{ 
+   host: 'da7a889b-06ce-488b-a3b7-516648ac6868.local',
+   os: 'SunOS',
+   version: '5.11',
+   arch: 'x64',
+   gid: 65534,
+   uid: 103,
+   title: '',
+   node: '0.10.17',
+   cpus: 
+   { 
+     model: 'Intel Xeon CPU E5645 ',
+     cores: 24,
+     speed: 2400 
+   },
+   paas: 'nodejitsu',
+   nodejitsu: 'account-subdomain',
+   up: 1350401,
+   load: [ 0.03125, 0.00390625, 0 ],
+   mem: { total: 268435456, free: 217288704 } 
+}
+```
+
+## Travis CI example
 
 ```
 {
-  host: 'testing-worker-linux-4-2-32000-linux-19',
-  type: 'Linux',
-  platform: 'linux',
+  host: 'testing-worker-linux-5-1-11238-linux-10',
+  os: 'Linux',
+  version: '2.6.32-042stab061.2',
   arch: 'x64',
-  release: '2.6.32-042stab061.2',
-  cpus: { model: undefined, cores: 32, speed: 2299 },
+  gid: 1000,
+  uid: 1000,
+  title: 'node',
+  node: '0.8.25',
+  cpus: { cores: 32, speed: 2299 },
   paas: 'travis',
-  travis: undefined,
-  up: 170.499075569,
-  load: [ 0.1123046875, 0.076171875, 0.0263671875 ], // 1, 5, and 15 minute load averages
-  mem: { total: 3221225472, free: 2876088320 }
+  up: 21.76509598,
+  load: [ 0.208984375, 0.04736328125, 0.0146484375 ],
+  mem: { total: 3221225472, free: 2842660864 }
 }
 ```
 
-## Example Macbook
+## Macbook example
 
 ```
 { 
   host: 'my-mac.local',
-  type: 'Darwin',
-  platform: 'darwin',
+  os: 'Darwin',
+  version: '11.4.2',
   arch: 'x64',
-  release: '11.4.2',
+  gid: 20,
+  uid: 501,
+  title: 'node',
+  node: '0.10.17',
   cpus: { model: 'Intel Core2 Duo CPU T9800', cores: 2, speed: 2930 },
-  up: 90533,
-  load: [ 0.83642578125, 0.9111328125, 0.8984375 ],
-  mem: { total: 8589934592, free: 3425923072 } 
+  up: 94816,
+  load: [ 1.03369140625, 1.0888671875, 1.01220703125 ],
+  mem: { total: 8589934592, free: 3252342784 }
 }
 ```
 
