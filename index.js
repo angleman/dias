@@ -23,10 +23,11 @@ if (appfog && appfog.length) {
 				delete parts[len-1];
 				delete parts[len-2];			
 				delete parts[0];
-				appfog.datacenter = parts.join('.').replace('..', '.').replace('.aws.', '.aws');
-				if (appfog.datacenter.substr(0,1) == '.') {
-					appfog.datacenter = substr(1,appfog.datacenter.length-1);
+				var datacenter = parts.join('.').replace('..', '.').replace('.aws.', '.aws');
+				if (datacenter.substr(0,1) == '.') {
+					datacenter = datacenter.substr(1, datacenter.length-1);
 				}
+				appfog.datacenter = datacenter;
 			}
 		}
 	}
