@@ -9,6 +9,18 @@ Detect PaaS details of your application instance
 npm install dias
 ```
 
+## Supported PaaS services
+
+- Heroku
+- AppFog
+- Nodejitsu
+- Strider
+- Travis CI
+- dotCloud
+- your box
+
+While Dias leverages [everypaas](https://github.com/niallo/everypaas/), as of version 0.0.7, everypaas appears to only have functional code: *Heroku, Strider, and dotCloud*.
+
 ## Usage
 
 ```
@@ -20,3 +32,4 @@ var dias = require('dias');
 
 Dependencies:
 
+[![everypaas](http://badgr.co/bsd/everypaas.png?bg=%23339e00 "everypaas@0.0.7")](https://github.com/niallo/everypaas)

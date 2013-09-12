@@ -5,9 +5,9 @@ var os        = require('os')        // http://nodejs.org/api/os.html
   , env       = process.env
   , appfog    = env.VMC_APP_INSTANCE // detect appfog as everpaas doesn't support it
   , nodejitsu = env.SUBDOMAIN        // detect nodejitsu as everpaas doesn't actually do it
-  , isHeroku  = (JSON.stringify(env).toLowerCase().indexOf('heroku') > -1); // best guess at this time is to look for HEROKU services
+  , envjson   = JSON.stringify(env).toLowerCase()
+  , paasList  = ['appfog', 'nodejitsu', 'heroku', 'travis', 'strider', 'dotcloud']
 ;
-
 
 
 function init() {
@@ -40,11 +40,21 @@ function init() {
 
 
 	var paas = process.env.paas || (nodejitsu) ? 'nodejitsu' 
-		: (appfog) ? 'appfog' 
-		: (isHeroku) ? 'heroku' 
-		: (everypaas.paas != 'none') ? everypaas.paas 
+		: (appfog)                             ? 'appfog' 
+		: (everypaas.paas != 'none')           ? everypaas.paas 
 		: undefined
 	;
+
+	if (!paas) {
+		for (var i=0; i<paasList.length; i++) {
+			var key = paasList[i];
+			if (envjson.indexOf(key) > -1) { // look for PaaS specific variables like: http://about.travis-ci.org/docs/user/ci-environment/
+				paas = key;
+				break;
+			}
+		}
+	}
+
 	if (paas) {
 		result.paas  = paas;
 		result[paas] = (paas == 'nodejitsu') ? nodejitsu 
