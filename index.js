@@ -1,5 +1,7 @@
-var os        = require('os')        // http://nodejs.org/api/os.html
-  , everypaas = require('everypaas') // niallo/everypaas
+var os        = require('os')            // http://nodejs.org/api/os.html
+  , everypaas = require('everypaas')     // niallo/everypaas
+  , serialNum = require('serial-number') // es128/serial-number
+  , http      = require('http')
   , isInit    = false
   , result    = {}
   , env       = process.env
@@ -8,6 +10,7 @@ var os        = require('os')        // http://nodejs.org/api/os.html
   , envjson   = JSON.stringify(env).toLowerCase()
   , paasList  = ['appfog', 'nodejitsu', 'heroku', 'travis', 'strider', 'dotcloud']
 ;
+
 
 if (appfog && appfog.length) {
 	appfog    = JSON.parse(appfog);
@@ -93,9 +96,9 @@ function init() {
 	if (paas) {
 		result.paas  = paas;
 		result[paas] = (paas == 'nodejitsu') ? nodejitsu 
-			: (paas == 'appfog') ? {
-				id: appfog.instance_id
-			  , index: appfog.instance_index
+			: (paas == 'appfog' && appfog) ? {
+				id:     appfog.instance_id
+			  , index:  appfog.instance_index
 			  , center: appfog.datacenter 
 			}
 			: undefined
@@ -103,7 +106,7 @@ function init() {
 	}
 
 	var json = JSON.stringify(result); // drop undefined variables
-	result = JSON.parse(json);
+	result   = JSON.parse(json);
 }
 
 
@@ -127,14 +130,92 @@ function update(options) {
 
 
 
-function dias(options) {
-	if (!isInit) {
-		init();
-	}
-	update(options);
-	return result;
+function getAwsUrl(url, cb) {
+	url           = 'http://169.254.169.254/latest/meta-data/' + url
+	var data      = ''
+	var request   = http.get(url, function(res) {
+		res.on('data', function (chunk) {
+			data += chunk;
+		}).on('end', function () {
+			if (data.length > 2) {
+				data = data.trim()
+			}
+			cb(null, data)
+		})
+	})
+	request.on('error', function(err) {
+		cb(err, result)
+	}).setTimeout(1000, function() {
+		cb(new Error(url + ' timeout'), result)
+	})
 }
 
 
 
-module.exports = dias;
+function getAwsZone(cb) {
+	getAwsUrl('placement/availability-zone', function(err, data) {
+		if (!err) {
+			result.aws.zone   = data
+ 			result.useragent += 'awsZone/' + data
+		}
+		cb(result)
+	})
+}
+
+
+
+function getAwsAmi(cb) {
+	getAwsUrl('ami-id', function(err, data) {
+		if (!err) {
+			result.aws.ami    = data
+			result.useragent += 'awsAmi/' + data
+		}
+		getAwsZone(cb)
+	})
+}
+
+
+
+function getAwsType(cb) {
+	getAwsUrl('instance-type', function(err, data) {
+		if (!err) {
+			result.aws.type   = data
+			result.useragent += 'awsType/' + data
+		}
+		getAwsAmi(cb)
+	})
+}
+
+
+
+function dias(options, callback) {
+	if (typeof(options) == 'function') {
+		callback = options
+		options  = {}
+	}
+	if (!isInit) {
+		init()
+	}
+	update(options)
+	if (callback) {
+		serialNum(function (err, value) {
+			if (err) {
+				callback(result)
+			} else {
+				result.serial    = value
+				result.useragent = result.os + '/' + result.serial
+				if (value.substr(0,2) == 'i-' || (result.appfog && result.appfog.center == 'aws')) { // AWS Instance
+					result.aws = {}
+					getAwsType(callback)
+				} else {
+					callback(result)
+				}
+			}
+		})
+	}
+	return result
+}
+
+
+
+module.exports = dias

@@ -1,6 +1,6 @@
 {
   "name": "dias",
-  "version": "0.1.20",
+  "version": "0.2.0",
   "description": "Detect PaaS details of your application instance",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,14 @@
     "url": "https://github.com/angleman/dias.git"
   },
   "keywords": [
+    "aws",
+    "serial-number",
+    "appfog",
+    "nodejitsu",
+    "travis",
+    "heroku",
+    "strider",
+    "dotcloud",
     "paas",
     "platform",
     "os",
@@ -27,7 +35,8 @@
     "node": ">=0.8.0"
   },
   "dependencies": {
-    "everypaas": "~0.0.7"
+    "everypaas": "~0.0.7",
+    "serial-number": "^0.3.0"
   },
   "devDependencies": {
     "license-md": "~0.2.5",
