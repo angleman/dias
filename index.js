@@ -156,7 +156,7 @@ function getAwsZone(cb) {
 	getAwsUrl('placement/availability-zone', function(err, data) {
 		if (!err) {
 			result.aws.zone   = data
- 			result.useragent += 'awsZone/' + data
+ 			result.useragent += ' awsZone/' + data
 		}
 		cb(result)
 	})
@@ -168,7 +168,7 @@ function getAwsAmi(cb) {
 	getAwsUrl('ami-id', function(err, data) {
 		if (!err) {
 			result.aws.ami    = data
-			result.useragent += 'awsAmi/' + data
+			result.useragent += ' awsAmi/' + data
 		}
 		getAwsZone(cb)
 	})
@@ -180,7 +180,7 @@ function getAwsType(cb) {
 	getAwsUrl('instance-type', function(err, data) {
 		if (!err) {
 			result.aws.type   = data
-			result.useragent += 'awsType/' + data
+			result.useragent += ' awsType/' + data
 		}
 		getAwsAmi(cb)
 	})
