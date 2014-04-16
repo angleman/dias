@@ -2,6 +2,7 @@ var os        = require('os')            // http://nodejs.org/api/os.html
   , everypaas = require('everypaas')     // niallo/everypaas
   , serialNum = require('serial-number') // es128/serial-number
   , http      = require('http')
+  , fs        = require('fs')
   , isInit    = false
   , result    = {}
   , env       = process.env
@@ -103,6 +104,21 @@ function init() {
 			}
 			: undefined
 		;
+	}
+
+	if (result.os == 'Linux') {
+		var rel = ['issue', 'system-release', 'redhat-release', 'debian_version', 'fedora-release']
+		var ver = null
+		for (var i=0; i<3; i++) {
+			var file = '/etc/' + rel[i]
+			if (fs.existsSync(file)) {
+				ver = fs.readFileSync(file)
+				break
+			}
+		}
+		if (ver) {
+			result.version = ver.replace('Red Hat Enterprise Linux', 'RHEL').replace('Red Hat', 'RH').replace('Server ', '').replace('server ', '').replace('release ', '')
+		}
 	}
 
 	var json = JSON.stringify(result); // drop undefined variables
