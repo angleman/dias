@@ -212,8 +212,9 @@ function dias(options, callback) {
 				}
 			}
 		})
+	} else {
+		return result
 	}
-	return result
 }
 
 
