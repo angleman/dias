@@ -108,16 +108,19 @@ function init() {
 
 	if (result.os == 'Linux') {
 		var rel = ['issue', 'system-release', 'redhat-release', 'debian_version', 'fedora-release']
-		var ver = null
+		var ver = false
 		for (var i=0; i<3; i++) {
 			var file = '/etc/' + rel[i]
 			if (fs.existsSync(file)) {
-				ver = fs.readFileSync(file)
+				ver = fs.readFileSync(file, 'utf8').split("\n")[0]
 				break
 			}
 		}
 		if (ver) {
-			result.version = ver.replace('Red Hat Enterprise Linux', 'RHEL').replace('Red Hat', 'RH').replace('Server ', '').replace('server ', '').replace('release ', '')
+			ver = ver.replace('Red Hat Enterprise Linux', 'RHEL').replace('Red Hat', 'RH').replace('Server ', '').replace('server ', '').replace('release ', '')
+			var part = ver.split(' ')
+			result.version = part[0]
+			if (part[1]) result.version += '-' + part[1]
 		}
 	}
 
