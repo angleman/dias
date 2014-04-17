@@ -3,6 +3,7 @@ var os        = require('os')            // http://nodejs.org/api/os.html
   , serialNum = require('serial-number') // es128/serial-number
   , http      = require('http')
   , fs        = require('fs')
+  , exec      = require('child_process').exec
   , isInit    = false
   , result    = {}
   , env       = process.env
@@ -107,7 +108,7 @@ function init() {
 	}
 
 	if (result.os == 'Linux') {
-		var rel = ['issue', 'system-release', 'redhat-release', 'debian_version', 'fedora-release']
+		var rel = ['system-release', 'redhat-release', 'debian_version', 'fedora-release', 'issue']
 		var ver = false
 		for (var i=0; i<3; i++) {
 			var file = '/etc/' + rel[i]
@@ -205,6 +206,20 @@ function getAwsType(cb) {
 	})
 }
 
+
+// todo: improve osx version detection with: system_profiler SPSoftwareDataType | grep "System Version" => System Version: OS X 10.8.5 (12F45)
+function getOsxVer(cb) {
+	if (result.os == 'Darwin') {
+		exec(cmdPrefix + 'system_profiler SPSoftwareDataType | grep "System Version"', function (error, data) {
+			if (!error &&  data.length > 2) {
+				var ver        = data.split('OS X ')[1]
+				result.os      = 'OSX'
+				result.version = ver.split(' ')[0]
+			}
+			cb(result)
+		})
+	}
+}
 
 
 function dias(options, callback) {
