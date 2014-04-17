@@ -1,6 +1,6 @@
 {
   "name": "dias",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Detect PaaS details of your application instance",
   "main": "index.js",
   "scripts": {
