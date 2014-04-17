@@ -35,7 +35,13 @@ dias(function(data) {
 })
 ```
 
-## New with 0.2 details available with use of callback
+## New with 0.3
+
+OSX version returned in callback instead of Darwin version
+
+## New with 0.2 
+
+Details available with use of callback:
 
 - AWS support
 - ```serial``` number
