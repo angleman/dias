@@ -210,7 +210,7 @@ function getAwsType(cb) {
 // todo: improve osx version detection with: system_profiler SPSoftwareDataType | grep "System Version" => System Version: OS X 10.8.5 (12F45)
 function getOsxVer(cb) {
 	if (result.os == 'Darwin') {
-		exec(cmdPrefix + 'system_profiler SPSoftwareDataType | grep "System Version"', function (error, data) {
+		exec('system_profiler SPSoftwareDataType | grep "System Version"', function (error, data) {
 			if (!error &&  data.length > 2) {
 				var ver        = data.split('OS X ')[1]
 				result.os      = 'OSX'
