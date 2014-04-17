@@ -242,6 +242,8 @@ function dias(options, callback) {
 				if (value.substr(0,2) == 'i-' || (result.appfog && result.appfog.center == 'aws')) { // AWS Instance
 					result.aws = {}
 					getAwsType(callback)
+				} else if (result.os == 'Darwin') {
+					getOsxVer(callback)
 				} else {
 					callback(result)
 				}
