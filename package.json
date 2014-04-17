@@ -24,6 +24,12 @@
     "platform",
     "os",
     "everypaas",
+    "windows",
+    "linux",
+    "freebsd",
+    "osx",
+    "sunos",
+    "os x",
     "PaaS"
   ],
   "author": "angleman",
