@@ -215,10 +215,17 @@ function getOsxVer(cb) {
 				var ver        = data.split('OS X ')[1]
 				result.os      = 'OSX'
 				result.version = ver.split(' ')[0]
+				setUserAgent()
 			}
 			cb(result)
 		})
 	}
+}
+
+
+function setUserAgent() {
+	result.useragent = result.os + '/' + result.version + ' SN/' + result.serial
+	if (result.node) result.useragent += result.useragent = ' node/' + result.node
 }
 
 
@@ -237,8 +244,7 @@ function dias(options, callback) {
 				callback(result)
 			} else {
 				result.serial    = value
-				result.useragent = result.os + '/' + result.version + ' SN/' + result.serial
-				if (result.node) result.useragent += result.useragent = ' node/' + result.node
+				setUserAgent()
 				if (value.substr(0,2) == 'i-' || (result.appfog && result.appfog.center == 'aws')) { // AWS Instance
 					result.aws = {}
 					getAwsType(callback)
