@@ -223,6 +223,7 @@ function dias(options, callback) {
 			} else {
 				result.serial    = value
 				result.useragent = result.os + '/' + result.version + ' SN/' + result.serial
+				if (result.node) result.useragent += result.useragent = ' node/' + result.node
 				if (value.substr(0,2) == 'i-' || (result.appfog && result.appfog.center == 'aws')) { // AWS Instance
 					result.aws = {}
 					getAwsType(callback)
