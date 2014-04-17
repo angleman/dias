@@ -1,16 +1,17 @@
-var os        = require('os')            // http://nodejs.org/api/os.html
-  , everypaas = require('everypaas')     // niallo/everypaas
-  , serialNum = require('serial-number') // es128/serial-number
-  , http      = require('http')
-  , fs        = require('fs')
-  , exec      = require('child_process').exec
-  , isInit    = false
-  , result    = {}
-  , env       = process.env
-  , appfog    = env.VMC_APP_INSTANCE // detect appfog as everpaas doesn't support it
-  , nodejitsu = env.SUBDOMAIN        // detect nodejitsu as everpaas doesn't actually do it
-  , envjson   = JSON.stringify(env).toLowerCase()
-  , paasList  = ['appfog', 'nodejitsu', 'heroku', 'travis', 'strider', 'dotcloud']
+var os          = require('os')            // http://nodejs.org/api/os.html
+  , everypaas   = require('everypaas')     // niallo/everypaas
+  , serialNum   = require('serial-number') // es128/serial-number
+  , http        = require('http')
+  , fs          = require('fs')
+  , exec        = require('child_process').exec
+  , isInit      = false
+  , result      = {}
+  , env         = process.env
+  , appfog      = env.VMC_APP_INSTANCE // detect appfog as everpaas doesn't support it
+  , nodejitsu   = env.SUBDOMAIN        // detect nodejitsu as everpaas doesn't actually do it
+  , envjson     = JSON.stringify(env).toLowerCase()
+  , paasList    = ['appfog', 'nodejitsu', 'heroku', 'travis', 'strider', 'dotcloud']
+  , initOptions = {}
 ;
 
 
@@ -176,7 +177,7 @@ function getAwsZone(cb) {
 	getAwsUrl('placement/availability-zone', function(err, data) {
 		if (!err) {
 			result.aws.zone   = data
- 			result.useragent += ' awsZone/' + data
+ 			result.useragent += initOptions.seperator + 'awsZone/' + data
 		}
 		cb(result)
 	})
@@ -188,7 +189,7 @@ function getAwsAmi(cb) {
 	getAwsUrl('ami-id', function(err, data) {
 		if (!err) {
 			result.aws.ami    = data
-			result.useragent += ' awsAmi/' + data
+			result.useragent += initOptions.seperator + 'awsAmi/' + data
 		}
 		getAwsZone(cb)
 	})
@@ -200,7 +201,7 @@ function getAwsType(cb) {
 	getAwsUrl('instance-type', function(err, data) {
 		if (!err) {
 			result.aws.type   = data
-			result.useragent += ' awsType/' + data
+			result.useragent += initOptions.seperator + 'awsType/' + data
 		}
 		getAwsAmi(cb)
 	})
@@ -224,8 +225,8 @@ function getOsxVer(cb) {
 
 
 function setUserAgent() {
-	result.useragent = result.os + '/' + result.version + ' SN/' + result.serial
-	if (result.node) result.useragent += result.useragent = ' node/' + result.node
+	result.useragent = result.os + '/' + result.version + initOptions.seperator + 'SN/' + result.serial
+	if (result.node) result.useragent += result.useragent = initOptions.seperator + 'node/' + result.node
 }
 
 
@@ -236,6 +237,8 @@ function dias(options, callback) {
 	}
 	if (!isInit) {
 		init()
+		if (options) initOptions = options
+		if (!initOptions.seperator) initOptions.seperator = ' '
 	}
 	update(options)
 	if (callback) {
