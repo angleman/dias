@@ -28,18 +28,12 @@ Based on [everypaas](https://github.com/niallo/everypaas/), but as of version 0.
 var dias = require('dias')
 console.log(dias())
 
-// additional 0.2 details via callback
+// additional details via callback
 
 dias(function(data) {
   console.log(data)
 })
 ```
-
-## New with 0.3
-
-OSX version returned in callback instead of Darwin version
-
-## New with 0.2 
 
 Details available with use of callback:
 

@@ -177,7 +177,7 @@ function getAwsZone(cb) {
 	getAwsUrl('placement/availability-zone', function(err, data) {
 		if (!err) {
 			result.aws.zone   = data
- 			result.useragent += initOptions.seperator + 'awsZone/' + data
+ 			result.useragent += '; ' + data + ')'
 		}
 		cb(result)
 	})
@@ -189,7 +189,7 @@ function getAwsAmi(cb) {
 	getAwsUrl('ami-id', function(err, data) {
 		if (!err) {
 			result.aws.ami    = data
-			result.useragent += initOptions.seperator + 'awsAmi/' + data
+			result.useragent += ' (' + data
 		}
 		getAwsZone(cb)
 	})
@@ -200,10 +200,12 @@ function getAwsAmi(cb) {
 function getAwsType(cb) {
 	getAwsUrl('instance-type', function(err, data) {
 		if (!err) {
-			result.aws.type   = data
-			result.useragent += initOptions.seperator + 'awsType/' + data
+			result.aws.type  = data
+			result.useragent += ' aws/' + data
+			getAwsAmi(cb)
+		} else {
+			cb(result)
 		}
-		getAwsAmi(cb)
 	})
 }
 
@@ -213,8 +215,8 @@ function getOsxVer(cb) {
 	if (result.os == 'Darwin') {
 		exec('system_profiler SPSoftwareDataType | grep "System Version"', function (error, data) {
 			if (!error &&  data.length > 2) {
-				var ver        = data.split('OS X ')[1]
-				result.os      = 'OSX'
+				var ver    = data.split('OS X ')[1]
+				result.os  = 'OSX'
 				result.version = ver.split(' ')[0]
 				setUserAgent()
 			}
@@ -223,12 +225,14 @@ function getOsxVer(cb) {
 	}
 }
 
-
-function setUserAgent() {
-	result.useragent = result.os + '/' + result.version + initOptions.seperator + 'SN/' + result.serial
-	if (result.node) result.useragent += result.useragent = initOptions.seperator + 'node/' + result.node
+function addNode() {
+	if (initOptions.uanode && result.node) result.useragent += ' node/' + result.node
 }
 
+function setUserAgent() {
+	result.useragent = result.os + '/' + result.version + ' (SN/' + result.serial + ')'
+	addNode()
+}
 
 function dias(options, callback) {
 	if (typeof(options) == 'function') {
@@ -237,7 +241,7 @@ function dias(options, callback) {
 	}
 	if (!isInit) {
 		init()
-		if (options) initOptions = options
+		if (options)                initOptions = options
 		if (!initOptions.seperator) initOptions.seperator = ' '
 	}
 	update(options)
