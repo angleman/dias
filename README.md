@@ -145,7 +145,7 @@ Details available with use of callback:
   host: 'my-mac.local',
   os: 'Darwin',
   serial: 'W890001F2QT',
-  useragent: 'OSX/W890001F2QT node/0.10.17'
+  useragent: 'OSX/10.8.5 (SN/W890001F2QT) node/0.10.17'
   version: '11.4.2',
   arch: 'x64',
   gid: 20,
