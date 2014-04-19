@@ -189,7 +189,7 @@ function getAwsAmi(cb) {
 	getAwsUrl('ami-id', function(err, data) {
 		if (!err) {
 			result.aws.ami    = data
-			result.useragent += ' (' + data
+			result.useragent += '; ' + data
 		}
 		getAwsZone(cb)
 	})
@@ -201,7 +201,7 @@ function getAwsType(cb) {
 	getAwsUrl('instance-type', function(err, data) {
 		if (!err) {
 			result.aws.type  = data
-			result.useragent += ' aws/' + data
+			result.useragent += ' PaaS/AWS (' + data
 			getAwsAmi(cb)
 		} else {
 			cb(result)
