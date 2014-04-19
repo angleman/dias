@@ -24,7 +24,7 @@ Based on [everypaas](https://github.com/niallo/everypaas/), but as of version 0.
 
 ## Usage
 
-```
+```js
 var dias = require('dias')
 console.log(dias())
 
@@ -43,7 +43,7 @@ Details available with use of callback:
 
 ## AWS example
 
-```
+```js
 {
   host: 'us01-dea-f8e454e6d5',
   os: 'Linux',
@@ -64,7 +64,7 @@ Details available with use of callback:
 
 ## AppFog example
 
-```
+```js
 {
   host: 'us01-dea-f8e454e6d5',
   os: 'Linux',
@@ -91,7 +91,7 @@ Details available with use of callback:
 
 ## Nodejitsu example
 
-```
+```js
 { 
    host: 'da7a889b-06ce-488b-a3b7-516648ac6868.local',
    os: 'SunOS',
@@ -118,7 +118,7 @@ Details available with use of callback:
 
 ## Travis CI example
 
-```
+```js
 {
    host: 'testing-worker-linux-5-1-11238-linux-10',
    os: 'Linux',
@@ -140,7 +140,7 @@ Details available with use of callback:
 
 ## Macbook example
 
-```
+```js
 { 
   host: 'my-mac.local',
   os: 'Darwin',
@@ -159,7 +159,17 @@ Details available with use of callback:
 }
 ```
 
+## CLI example
 
+```js
+var dias  = require('dias')
+var argv  = require('minimist')(process.argv.slice(2))
+
+dias({uanode: argv.n}, function(platform) {
+  var result = (argv.u) ? platform.useragent : JSON.stringify(platform)
+  console.log(result)
+})
+```
 
 ## License: MIT
 
