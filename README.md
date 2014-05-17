@@ -58,7 +58,7 @@ Details available with use of callback:
   cpus: { model: 'Intel Xeon CPU E5-2665', cores: 2 },
   up: 10212921.312263723,
   load: [ 0.5444335935, 0.40966796875, 0.35546875 ], // 1, 5, & 15 minute load averages
-  mem: { total: 17909567488, free: 352100352 } 
+  mem: { total: 17909567488, free: 352100352 }
 }
 ```
 
@@ -78,21 +78,21 @@ Details available with use of callback:
   node: '0.8.14',
   cpus: { model: 'Intel Xeon CPU E5-2665', cores: 2 },
   paas: 'appfog',
-  appfog: { 
+  appfog: {
      id: '28af8427780e30d77d1715e64880445f',
      index: 0,
      center: 'aws'
   },
   up: 10212921.312263723,
   load: [ 0.5444335935, 0.40966796875, 0.35546875 ], // 1, 5, & 15 minute load averages
-  mem: { total: 17909567488, free: 352100352 } 
+  mem: { total: 17909567488, free: 352100352 }
 }
 ```
 
 ## Nodejitsu example
 
 ```js
-{ 
+{
    host: 'da7a889b-06ce-488b-a3b7-516648ac6868.local',
    os: 'SunOS',
    serial: 'SYS-1234567890',
@@ -102,17 +102,17 @@ Details available with use of callback:
    gid: 65534,
    uid: 103,
    node: '0.10.17',
-   cpus: 
-   { 
+   cpus:
+   {
      model: 'Intel Xeon CPU E5645',
      cores: 24,
-     speed: 2400 
+     speed: 2400
    },
    paas: 'nodejitsu',
    nodejitsu: 'account-subdomain',
    up: 1350401,
    load: [ 0.03125, 0.00390625, 0 ],
-   mem: { total: 268435456, free: 217288704 } 
+   mem: { total: 268435456, free: 217288704 }
 }
 ```
 
@@ -141,11 +141,11 @@ Details available with use of callback:
 ## Macbook example
 
 ```js
-{ 
+{
   host: 'my-mac.local',
   os: 'Darwin',
   serial: 'W890001F2QT',
-  useragent: 'OSX/10.8.5 (SN/W890001F2QT) node/0.10.17'
+  useragent: 'OSX/10.8.5 SN/W890001F2QT node/0.10.17'
   version: '11.4.2',
   arch: 'x64',
   gid: 20,
