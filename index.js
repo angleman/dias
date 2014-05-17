@@ -27,7 +27,7 @@ if (appfog && appfog.length) {
 				parts = uri.split('.');
 				var len = parts.length;
 				delete parts[len-1];
-				delete parts[len-2];			
+				delete parts[len-2];
 				delete parts[0];
 				var datacenter = parts.join('.').replace('..', '.').replace('.aws.', '.aws');
 				if (datacenter.substr(0,1) == '.') {
@@ -80,9 +80,9 @@ function init() {
 	}
 
 
-	var paas = process.env.paas || (nodejitsu) ? 'nodejitsu' 
-		: (appfog)                             ? 'appfog' 
-		: (everypaas.paas != 'none')           ? everypaas.paas 
+	var paas = process.env.paas || (nodejitsu) ? 'nodejitsu'
+		: (appfog)                             ? 'appfog'
+		: (everypaas.paas != 'none')           ? everypaas.paas
 		: undefined
 	;
 
@@ -98,11 +98,11 @@ function init() {
 
 	if (paas) {
 		result.paas  = paas;
-		result[paas] = (paas == 'nodejitsu') ? nodejitsu 
+		result[paas] = (paas == 'nodejitsu') ? nodejitsu
 			: (paas == 'appfog' && appfog) ? {
 				id:     appfog.instance_id
 			  , index:  appfog.instance_index
-			  , center: appfog.datacenter 
+			  , center: appfog.datacenter
 			}
 			: undefined
 		;
@@ -230,7 +230,7 @@ function addNode() {
 }
 
 function setUserAgent() {
-	result.useragent = result.os + '/' + result.version + ' (SN/' + result.serial + ')'
+	result.useragent = result.os + '/' + result.version + ' SN/' + result.serial
 	addNode()
 }
 
