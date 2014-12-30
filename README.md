@@ -144,14 +144,14 @@ Details available with use of callback:
 {
   host: 'my-mac.local',
   os: 'Darwin',
-  serial: 'W890001F2QT',
-  useragent: 'OSX/10.8.5 SN/W890001F2QT node/0.10.17'
+  serial: 'W980000A0BM',
+  useragent: 'OSX/10.8.5 SN/W980000A0BM node/0.10.33'
   version: '11.4.2',
   arch: 'x64',
   gid: 20,
   uid: 501,
   title: 'node',
-  node: '0.10.17',
+  node: '0.10.33',
   cpus: { model: 'Intel Core2 Duo CPU T9800', cores: 2, speed: 2930 },
   up: 94816,
   load: [ 1.03369140625, 1.0888671875, 1.01220703125 ],
