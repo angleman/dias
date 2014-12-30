@@ -175,4 +175,4 @@ dias({uanode: argv.n}, function(platform) {
 
 Dependencies:
 
-[![everypaas](http://badgr.co/bsd/everypaas.png?bg=%23339e00 "everypaas@0.0.7")](https://github.com/niallo/everypaas)
+[![everypaas](http://img.shields.io/badge/bsd-everypaas.png?bg=%23339e00 "everypaas@0.0.7")](https://github.com/niallo/everypaas)
