@@ -225,13 +225,9 @@ function getOsxVer(cb) {
 	}
 }
 
-function addNode() {
-	if (initOptions.uanode && result.node) result.useragent += ' node/' + result.node
-}
-
 function setUserAgent() {
 	result.useragent = result.os + '/' + result.version + ' SN/' + result.serial
-	addNode()
+  if (initOptions.uanode && result.node) result.useragent += ' node/' + result.node
 }
 
 function dias(options, callback) {
