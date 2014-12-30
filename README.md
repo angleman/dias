@@ -1,4 +1,4 @@
-# dias [![NPM version](https://img.shields.io/npm/v/npm.svg)](https://npmjs.org/package/dias) [![Build Status](https://img.shields.io/travis/angleman/dias.svg?branch=master)](https://travis-ci.org/angleman/dias) [![Dependency Status](https://img.shields.io/gemnasium/angleman/dias.svg?branch=master)](https://gemnasium.com/angleman/dias) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+# dias [![NPM version](https://img.shields.io/github/tag/angleman/dias.svg)](https://npmjs.org/package/dias) [![Build Status](https://img.shields.io/travis/angleman/dias.svg?branch=master)](https://travis-ci.org/angleman/dias) [![Dependency Status](https://img.shields.io/gemnasium/angleman/dias.svg?branch=master)](https://gemnasium.com/angleman/dias) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 Detect PaaS details of your application instance
 
