@@ -9,7 +9,7 @@ describe('package', function() {
     })
 
     it('initializes', function(done) {
-        var works = app(function(platform) {
+        var works = app({uanode: 1}, function(platform) {
 	        should.exist(platform)
     	    console.log(platform)
     	    done()
