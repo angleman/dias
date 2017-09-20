@@ -171,6 +171,11 @@ dias({uanode: argv.n}, function(platform) {
 })
 ```
 
+## Optional modules
+
+`serial-number` module is optional to provided additional information, ex: AWS instance information. It is optional as some PaaS use have `read-only file system, access '/usr/local/bin'`
+
+
 ## License: MIT
 
 Dependencies:

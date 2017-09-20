@@ -1,6 +1,5 @@
 var os          = require('os')            // http://nodejs.org/api/os.html
   , everypaas   = require('everypaas')     // niallo/everypaas
-  , serialNum   = require('serial-number') // es128/serial-number
   , http        = require('http')
   , fs          = require('fs')
   , exec        = require('child_process').exec
@@ -14,6 +13,10 @@ var os          = require('os')            // http://nodejs.org/api/os.html
   , initOptions = {}
 ;
 
+var serialNum // optional module
+try {
+  serialNum   = require('serial-number') // es128/serial-number
+} catch(e) {}
 
 if (appfog && appfog.length) {
 	appfog    = JSON.parse(appfog);
@@ -243,6 +246,14 @@ function dias(options, callback) {
 	}
 	update(options)
 	if (callback) {
+    if (!serialNum) {
+      if (result.os == 'Darwin') {
+        getOsxVer(callback)
+      } else {
+        callback(result)
+      }
+      return
+    }
 		serialNum(function (err, value) {
 			if (err) {
 				callback(result)
