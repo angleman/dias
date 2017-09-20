@@ -215,7 +215,7 @@ function getOsxVer(cb) {
 	if (result.os == 'Darwin') {
 		exec('system_profiler SPSoftwareDataType | grep "System Version"', function (error, data) {
 			if (!error &&  data.length > 2) {
-				var ver    = data.split('OS X ')[1]
+				var ver    = data.split('OS X ')[1] || ''
 				result.os  = 'OSX'
 				result.version = ver.split(' ')[0]
 				setUserAgent()
