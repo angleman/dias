@@ -72,6 +72,7 @@ function init() {
 	  , uid:      process.getuid()
 //	  , title:    (process.title && process.title.length) ? process.title : undefined
 	  , node:     process.version.replace('v', '')
+    , lts:      (process.release || {}).lts || 0
 	  , cpus:     {
 	  		model: model
 	  	  , cores: cpus.length
@@ -227,7 +228,7 @@ function getOsxVer(cb) {
 
 function setUserAgent() {
 	result.useragent = result.os + '/' + result.version + ' SN/' + result.serial
-  if (initOptions.uanode && result.node) result.useragent += ' node/' + result.node
+  if (initOptions.uanode && result.node) result.useragent += ' node/' + result.node + ' LTS/' + result.lts
 }
 
 function dias(options, callback) {
